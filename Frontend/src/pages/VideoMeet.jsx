@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import io from "socket.io-client";
 
-import styles from "../styles/videoComponent.module.css";
+import styles from "../styles/VideoComponent.module.css";
 import { Badge, Button, IconButton, TextField } from '@mui/material';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import VideocamOffIcon from '@mui/icons-material/VideocamOff';
