@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   Avatar, Button, CssBaseline, TextField, Link, Paper,
   Box, Grid,
-  Snackbar,
+  Snackbar, CircularProgress
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -18,11 +18,13 @@ export default function Authentication() {
   const [message, setMessage] = React.useState('');
   const [open,setOpen] = React.useState(false);
   const [error,setError] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
 
 const {handleRegister , handleLogin} = React.useContext(AuthContext);
 
   let handleAuth = async (e)=>{
     e.preventDefault();
+    setIsLoading(true);
     try{
       if(formstate === 0){
         let result  = await handleLogin(username,password);
@@ -38,8 +40,10 @@ const {handleRegister , handleLogin} = React.useContext(AuthContext);
         setFormstate(0)
       }
     }catch(err){
-      let message = (err.response.data.message);
+      let message = err?.response?.data?.message || "An error occurred";
       setError(message);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -111,7 +115,7 @@ const {handleRegister , handleLogin} = React.useContext(AuthContext);
                 name="name"
                 value={name}
                 autoComplete="name"
-
+                variant="outlined"
                 onChange={(e) => setName(e.target.value)}
                 sx={{
                   visibility: formstate === 1 ? 'visible' : 'hidden',
@@ -129,6 +133,7 @@ const {handleRegister , handleLogin} = React.useContext(AuthContext);
                 label="Username"
                 name="username"
                 value={username}
+                variant="outlined"
                 autoComplete="username"
                 autoFocus={formstate === 0}
                 onChange={(e) => setUsername(e.target.value)}
@@ -143,6 +148,7 @@ const {handleRegister , handleLogin} = React.useContext(AuthContext);
                 label="Password"
                 type="password"
                 id="password"
+                variant="outlined"
                 autoComplete="current-password"
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -152,10 +158,11 @@ const {handleRegister , handleLogin} = React.useContext(AuthContext);
               <Button
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, height: '48px' }}
                 onClick={handleAuth}
+                disabled={isLoading}
               >
-                {formstate === 0 ? 'Sign In' : 'Sign Up'}
+                {isLoading ? <CircularProgress size={24} color="inherit" /> : (formstate === 0 ? 'Sign In' : 'Sign Up')}
               </Button>
 
               <Grid container justifyContent="flex-end">

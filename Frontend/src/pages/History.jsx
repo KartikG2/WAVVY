@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { IconButton } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
+import Navbar from './Navbar';
 
 export default function History() {
   const { getHistoryOfUser } = useContext(AuthContext);
@@ -42,11 +43,7 @@ export default function History() {
   return (
     <div>
 
-        <IconButton style={{position:"absolute",right:"10px"}} onClick={() => {
-                routeTo("/home")
-            }}>
-                <HomeIcon />
-        </IconButton >
+      <Navbar />
 
 
 

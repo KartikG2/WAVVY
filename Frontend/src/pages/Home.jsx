@@ -5,6 +5,7 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import { Button, IconButton, TextField } from "@mui/material";
 import "../App.css";
 import { AuthContext } from "../contexts/AuthContext";
+import Navbar from "./Navbar";
 
 function Home() {
   let navigate = useNavigate();
@@ -34,28 +35,7 @@ const {addToUserHistory} = useContext(AuthContext);
 
   return (
     <>
-      <div className="navBar">
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <h2>WAVVY</h2>
-        </div>
-
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <IconButton onClick={()=>{navigate('/history')}}>
-            <RestoreIcon />
-            <p style={{ fontSize: "16px" }}>History</p>
-          </IconButton>
-
-          <Button
-            onClick={() => {
-              localStorage.removeItem("token");
-              navigate("/auth");
-            }}
-          >
-            Logout
-          </Button>
-          <p>{}</p>
-        </div>
-      </div>
+      <Navbar />
 
       <div className="meetContainer">
         <div className="leftPanel">

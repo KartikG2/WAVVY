@@ -1,20 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "../App.css"
+import Navbar from './Navbar';
 
 const LandingPage = () => {
   return (
     <div className='landingPageContainer'>
-        <nav>
-            <div className='navHeader'>
-                <h2>WAVVY</h2>
-            </div>
-            <div className='navList'>
-               <Link to={"/Guest-Room"} style={{color :"white",textDecoration:"none"}}>Join as Guest</Link>
-                <Link to={"/auth"} style={{color :"white",textDecoration:"none"}}>Sign Up</Link>
-                <Link to={"/auth"} style={{color :"white",textDecoration:"none"}}>Sign In</Link>
-            </div>
-        </nav>
+        <Navbar />
 
         <div className="landingMainContainer">
             <div className='landingPage-hero-container'>
