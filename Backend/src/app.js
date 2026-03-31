@@ -16,7 +16,11 @@ const Uri = process.env.MONGO_URL;
 
 // middlewares 
 app.set("port", (process.env.PORT || 8080));
-app.use(cors());
+app.use(cors({
+    origin: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    credentials: true
+}));
 app.use(express.json({ limit: "40kb" }));
 app.use(express.urlencoded({ limit: "40kb", extended: true }));
 
